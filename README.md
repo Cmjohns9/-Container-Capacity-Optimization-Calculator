@@ -1,3 +1,26 @@
-# -Container-Capacity-Optimization-Calculator
-Calculator for optimizing import shipments by container size, vendor, and style capacity
-A browser-based tool for planning fabric container shipments. Select style, vendor, and container size to calculate fill efficiency, roll counts, and whether a shipment meets minimum load thresholds — with support for mixed-style containers
+# Fabric Container Calculator
+
+Browser-based calculator for estimating fabric container utilization and shipment planning.
+
+## Features
+
+- Single-style container analysis
+- Multi-style / mixed container planning
+- Fill-percentage calculations
+- Vendor-specific capacity references
+- Roll breakdown calculations
+
+## Usage
+
+Open `index.html` in any modern browser.
+
+## Project Structure
+
+- `index.html` - Application UI
+- `css/styles.css` - Styling
+- `js/data.js` - Container capacity data
+- `js/app.js` - Calculator logic
+
+## License
+
+MIT

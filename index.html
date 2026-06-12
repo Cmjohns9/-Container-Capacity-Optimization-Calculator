@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabric Container Calculator</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+<h2><i class="ti ti-container" aria-hidden="true" style="font-size:20px;vertical-align:-3px;margin-right:8px;"></i>Container shipping calculator</h2>
+
+<div class="tab-row">
+  <button class="tab active" onclick="setTab('single')" id="tab-single">Single style</button>
+  <button class="tab" onclick="setTab('multi')" id="tab-multi">Multi-style / mixed container</button>
+  <button class="tab" onclick="setTab('ref')" id="tab-ref">Reference table</button>
+</div>
+
+<div id="view-single">
+  <div class="grid2" style="gap:12px;margin-bottom:1.25rem;">
+    <div class="card">
+      <label>Style number</label>
+      <select id="sel-style" onchange="onStyleChange()">
+        <option value="">— select style —</option>
+      </select>
+    </div>
+    <div class="card">
+      <label>Vendor</label>
+      <select id="sel-vendor" onchange="onVendorChange()" disabled>
+        <option value="">— select vendor —</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid2" style="gap:12px;margin-bottom:1.25rem;">
+    <div class="card">
+      <label>Container size</label>
+      <select id="sel-container" onchange="onContainerChange()" disabled>
+        <option value="">— select container —</option>
+      </select>
+    </div>
+    <div class="card">
+      <label>Target quantity (yds)</label>
+      <input type="number" id="inp-qty" placeholder="e.g. 45000" min="0" oninput="recalc()" disabled />
+    </div>
+  </div>
+
+  <div id="result-single">
+    <div class="empty-state">
+      <i class="ti ti-selector" aria-hidden="true"></i>
+      Select a style, vendor, and container to see capacity and fill analysis
+    </div>
+  </div>
+</div>
+
+<div id="view-multi" style="display:none;">
+  <div class="card section">
+    <h3>Container</h3>
+    <div class="grid2">
+      <div>
+        <label>Container size</label>
+        <select id="m-container" onchange="multiRecalc()">
+          <option value="">— select —</option>
+          <option value="20'">20' (28 CBM)</option>
+          <option value="40'">40' (55 CBM)</option>
+          <option value="40'HQ">40' HQ (65 CBM)</option>
+        </select>
+      </div>
+      <div>
+        <label>Fill target</label>
+        <select id="m-fill-target" onchange="multiRecalc()">
+          <option value="90">≥ 90% fill</option>
+          <option value="85">≥ 85% fill</option>
+          <option value="80">≥ 80% fill</option>
+          <option value="75">≥ 75% fill</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-lines">
+    <div class="card section" id="m-lines-inner">
+      <h3>Styles to ship</h3>
+      <div id="m-rows"></div>
+      <button onclick="addMultiRow()" style="margin-top:.75rem;font-size:13px;padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-primary);cursor:pointer;"><i class="ti ti-plus" aria-hidden="true"></i> Add style</button>
+    </div>
+  </div>
+
+  <div id="result-multi"></div>
+</div>
+
+<div id="view-ref" style="display:none;">
+  <div class="card">
+    <label>Filter by style</label>
+    <select id="ref-filter" onchange="renderRef()">
+      <option value="">All styles</option>
+    </select>
+  </div>
+  <div id="ref-table" style="margin-top:1rem;overflow-x:auto;"></div>
+</div>
+
+</div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
